@@ -12,6 +12,10 @@
 [![itch.io](https://img.shields.io/badge/itch.io-Cedsson-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white)](https://cedsson.itch.io)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:williameklund2@gmail.com)
 
+<br/><br/>
+
+> *💡 **Note:** After developing the Krut 3D engine and my core systems in local repositories, I've recently started migrating my active development, benchmarks, and open-source libraries onto GitHub.*
+
 </div>
 
 ---
@@ -68,9 +72,3 @@
 * **Languages & Core:** `C#` &middot; `.NET 10` &middot; `Native AOT` &middot; `HLSL` &middot; `C/C++`
 * **Graphics & Simulation:** `Direct3D 12` &middot; `Vulkan` &middot; `Forward+ Rendering` &middot; `Jitter2 Physics` &middot; `FMOD`
 * **Backend & Infrastructure:** `ASP.NET Core` &middot; `PostgreSQL` &middot; `Docker` &middot; `Steamworks Auth`
-
----
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Cedsson&show_icons=true&theme=github_dark&hide_border=true&title_color=c8452c&icon_color=c8452c" alt="GitHub Stats" />
-</div>
