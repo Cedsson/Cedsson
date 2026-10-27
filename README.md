@@ -20,13 +20,14 @@
 
 ---
 
-### ⚙️ Krut Engine
-> *A modern 3D game engine built solo in C# / .NET 10.*
+### ⚙️ Krut Engine `v2.0`
+> *A modern 3D game engine built solo in C# / .NET 10 with a Quake/Source-inspired BSP workflow and modern high-end rendering.*
 
-* **Graphics:** Custom Forward+ (clustered) renderer with **Direct3D 12** and **Vulkan** backends, offline-compiled HLSL (DXIL & SPIR-V), PBR, cascaded shadow maps, and custom GI lightmapper.
-* **Architecture:** Clean subsystem isolation tested via xUnit, deterministic simulation running headless, and **Native AOT** compilation.
-* **Level Workflow:** Quake/Source-style BSP/CSG workflow using TrenchBroom, portal culling, and triangle BVH collision.
-* **Scale:** Architected and maintained solo across **~240k+ LOC** of tested C# (spanning the engine core, multiplayer racer, and distributed backend).
+* **Graphics Backends:** Custom GPU abstraction layer (`Krut.Engine.Gpu`) supporting **Direct3D 12** and **Vulkan**. Shaders written in HLSL, compiled offline to DXIL and SPIR-V.
+* **Advanced Rendering:** Forward+ (clustered) renderer with linear HDR, tonemapping, full PBR level geometry (metallic/roughness, normal maps, ORM, emissive), directional lightmaps, SSAO, SSR with parallax-corrected reflection probes, and volumetric light/fog.
+* **Image Clarity Philosophy:** Native resolution sharpness with MSAA and sharp post-process AA (CMAA2) — strictly no TAA, no upscaler smear. Run-time toggleable features with presets (Classic, Modern, Ultra) targeting **144 FPS** at 1080p on an RTX 3060.
+* **World & Simulation:** TrenchBroom `.map`/`.bsp` CSG workflow, portal and frustum culling, custom triangle BVH capsule collision, and Jitter2 physics.
+* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation, **Native AOT** compilation, and **~240k+ LOC** maintained across engine, multiplayer racer, and distributed backend.
 
 ---
 
@@ -79,5 +80,5 @@
 ### 🛠️ Tech & Systems
 
 * **Languages & Core:** `C#` &middot; `.NET 10` &middot; `Native AOT` &middot; `HLSL` &middot; `C/C++`
-* **Graphics & Simulation:** `Direct3D 12` &middot; `Vulkan` &middot; `Forward+ Rendering` &middot; `Jitter2 Physics` &middot; `FMOD`
+* **Graphics & Simulation:** `Direct3D 12` &middot; `Vulkan` &middot; `Forward+ Rendering` &middot; `PBR / HDR` &middot; `CMAA2` &middot; `Jitter2 Physics` &middot; `FMOD`
 * **Backend & Infrastructure:** `ASP.NET Core` &middot; `PostgreSQL` &middot; `Docker` &middot; `Steamworks Auth`
