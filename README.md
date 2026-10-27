@@ -53,11 +53,11 @@
         <img src="assets/commute-poster.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        A 10-minute <b>vertical slice</b> single-player FPS built to prove and stress-test engine mechanics: capsule-vs-triangle collision, FMOD audio occlusion, and AI navmeshes.
+        A 10-minute <b>vertical slice and engine tech demo</b> built to integrate and test all subsystems in a playable FPS: Forward+ rendering, capsule-vs-triangle collision, FMOD spatial audio occlusion, and AI navmeshes.
       </p>
       <div align="center">
         <img src="https://img.shields.io/badge/Vertical_Slice-10_min-blueviolet?style=flat-square" />
-        <img src="https://img.shields.io/badge/TrenchBroom-BSP-orange?style=flat-square" />
+        <img src="https://img.shields.io/badge/Engine-Tech_Demo-orange?style=flat-square" />
         <img src="https://img.shields.io/badge/itch.io-Playable_Demo-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white" />
       </div>
     </td>
