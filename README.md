@@ -50,7 +50,7 @@
     <td width="50%" valign="top">
       <h4 align="center">🚇 Commute</h4>
       <a href="https://cedsson.itch.io/commute">
-        <img src="assets/commute-poster.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
+        <img src="assets/commute.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
         A 10-minute <b>vertical slice and engine tech demo</b> built to integrate and test all subsystems in a playable FPS: Forward+ rendering, capsule-vs-triangle collision, FMOD spatial audio occlusion, and AI navmeshes.
