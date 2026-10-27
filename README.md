@@ -21,11 +21,12 @@
 ---
 
 ### ⚙️ Krut Engine
-> *A modern 3D game engine built solo in C# / .NET 10 (~58k LOC).*
+> *A modern 3D game engine built solo in C# / .NET 10.*
 
 * **Graphics:** Custom Forward+ (clustered) renderer with **Direct3D 12** and **Vulkan** backends, offline-compiled HLSL (DXIL & SPIR-V), PBR, cascaded shadow maps, and custom GI lightmapper.
 * **Architecture:** Clean subsystem isolation tested via xUnit, deterministic simulation running headless, and **Native AOT** compilation.
 * **Level Workflow:** Quake/Source-style BSP/CSG workflow using TrenchBroom, portal culling, and triangle BVH collision.
+* **Scale:** Architected and maintained solo across **~240k+ LOC** of tested C# (spanning the engine core, multiplayer racer, and distributed backend).
 
 ---
 
