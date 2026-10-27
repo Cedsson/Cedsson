@@ -20,37 +20,45 @@
 
 ---
 
-### 🕹️ What I Build
+### ⚙️ Krut Engine
+> *A modern 3D game engine built solo in C# / .NET 10 (~58k LOC).*
+
+* **Graphics:** Custom Forward+ (clustered) renderer with **Direct3D 12** and **Vulkan** backends, offline-compiled HLSL (DXIL & SPIR-V), PBR, cascaded shadow maps, and custom GI lightmapper.
+* **Architecture:** Clean subsystem isolation tested via xUnit, deterministic simulation running headless, and **Native AOT** compilation.
+* **Level Workflow:** Quake/Source-style BSP/CSG workflow using TrenchBroom, portal culling, and triangle BVH collision.
+
+---
+
+### 🕹️ Games Built on Krut
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h4 align="center">🏎️ Krut.Racing & Engine</h4>
-      <a href="https://cedsson.github.io/#engine">
-        <img src="https://cedsson.github.io/assets/media/Racing-poster.jpg" alt="Krut Racing" width="100%" style="border-radius: 6px;" />
+      <h4 align="center">🏎️ Krut.Racing</h4>
+      <a href="https://cedsson.github.io/#racing">
+        <img src="assets/Racing-poster.jpg" alt="Krut.Racing" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        Custom <b>3D Game Engine</b> (~58k LOC solo) in C#/.NET 10. Forward+ renderer on <b>Direct3D 12 & Vulkan</b>, GI lightmapper, and Native AOT compilation.
+        Online multiplayer racing game with an authoritative dedicated server, client prediction, car physics, and an <b>ASP.NET Core & PostgreSQL</b> backend with Steam authentication.
       </p>
       <div align="center">
-        <img src="https://img.shields.io/badge/DirectX_12-0078D7?style=flat-square&logo=windows&logoColor=white" />
-        <img src="https://img.shields.io/badge/Vulkan-red?style=flat-square&logo=vulkan&logoColor=white" />
-        <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white" />
-        <img src="https://img.shields.io/badge/.NET_10-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+        <img src="https://img.shields.io/badge/Multiplayer-Dedicated_Server-blue?style=flat-square" />
+        <img src="https://img.shields.io/badge/ASP.NET_Core-Backend-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+        <img src="https://img.shields.io/badge/PostgreSQL-Database-316192?style=flat-square&logo=postgresql&logoColor=white" />
       </div>
     </td>
     <td width="50%" valign="top">
-      <h4 align="center">🚇 Commute (FPS Prototype)</h4>
+      <h4 align="center">🚇 Commute</h4>
       <a href="https://cedsson.itch.io/commute">
-        <img src="https://cedsson.github.io/assets/media/commute-poster.jpg" alt="Commute Demo" width="100%" style="border-radius: 6px;" />
+        <img src="assets/commute-poster.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        Retro-styled single-player FPS built on Krut to stress-test capsule-vs-triangle collision, FMOD audio occlusion, and AI navigation meshes.
+        A 10-minute <b>vertical slice</b> single-player FPS built to prove and stress-test engine mechanics: capsule-vs-triangle collision, FMOD audio occlusion, and AI navmeshes.
       </p>
       <div align="center">
+        <img src="https://img.shields.io/badge/Vertical_Slice-10_min-blueviolet?style=flat-square" />
         <img src="https://img.shields.io/badge/TrenchBroom-BSP-orange?style=flat-square" />
-        <img src="https://img.shields.io/badge/FMOD-Audio-black?style=flat-square" />
-        <img src="https://img.shields.io/badge/itch.io-Playable-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white" />
+        <img src="https://img.shields.io/badge/itch.io-Playable_Demo-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white" />
       </div>
     </td>
   </tr>
@@ -61,7 +69,7 @@
 ### ⚡ Open Source
 
 * **[Krut.Netcode](https://github.com/Cedsson/Krut.Netcode)** `MIT` — High-performance, authoritative multiplayer netcode library for .NET.
-  * **Zero allocations:** Steady-state messaging produces 0 B GC pressure.
+  * **Zero allocations:** Steady-state messaging produces 0 B GC pressure with object pooling.
   * **Prediction & Reconciliation:** Instant local inputs with tick rewinds and smooth correction blending.
   * **Link Degradation Simulator:** Built-in simulation of latency spikes, burst packet loss, and jitter.
 
