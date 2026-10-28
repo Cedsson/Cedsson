@@ -33,7 +33,7 @@
 * **Advanced Rendering:** Forward+ (clustered) renderer with linear HDR, tonemapping, full PBR level geometry (metallic/roughness, normal maps, ORM, emissive), directional lightmaps, SSAO, SSR with parallax-corrected reflection probes, and volumetric light/fog.
 * **Image Clarity Philosophy:** Native resolution sharpness with MSAA and sharp post-process AA (CMAA2) — strictly no TAA, no upscaler smear. Targeting **144 FPS** at 1080p on an RTX 3060.
 * **World & Simulation:** TrenchBroom `.map`/`.bsp` CSG workflow, portal and frustum culling, custom triangle BVH capsule collision, and Jitter2 physics.
-* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation, **Native AOT** compilation, and **~240k+ LOC** maintained across engine, multiplayer racer, and distributed backend.
+* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation, **Native AOT** compilation, and **~240k+ LOC** maintained together across Krut.Engine, Krut.Racing, and Commute (Krut.FPS).
 
 ---
 
