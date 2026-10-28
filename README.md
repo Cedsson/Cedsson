@@ -23,6 +23,12 @@
 ### ⚙️ Krut Engine `v2.0`
 > *A modern 3D game engine built solo in C# / .NET 10 with a Quake/Source-inspired BSP workflow and modern high-end rendering.*
 
+<p align="center">
+  <a href="https://cedsson.github.io/#engine">
+    <img src="assets/krut-showcase.jpg" alt="Krut Engine v2.0 Realtime PBR Showcase" width="100%" style="border-radius: 8px;" />
+  </a>
+</p>
+
 * **Graphics Backends:** Custom GPU abstraction layer (`Krut.Engine.Gpu`) supporting **Direct3D 12** and **Vulkan**. Shaders written in HLSL, compiled offline to DXIL and SPIR-V.
 * **Advanced Rendering:** Forward+ (clustered) renderer with linear HDR, tonemapping, full PBR level geometry (metallic/roughness, normal maps, ORM, emissive), directional lightmaps, SSAO, SSR with parallax-corrected reflection probes, and volumetric light/fog.
 * **Image Clarity Philosophy:** Native resolution sharpness with MSAA and sharp post-process AA (CMAA2) — strictly no TAA, no upscaler smear. Targeting **144 FPS** at 1080p on an RTX 3060.
