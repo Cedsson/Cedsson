@@ -20,20 +20,22 @@
 
 ---
 
-### ⚙️ Krut Engine `v2.0`
-> *A modern 3D game engine built solo in C# / .NET 10 with a Quake/Source-inspired BSP workflow and modern high-end rendering.*
+### ⚙️ Krut Engine `v3.2`
+> *A modern 3D game engine built solo in C# 14 / .NET 10 with a Quake/Source-inspired BSP workflow, high-end Forward+ PBR rendering, GPU compute VFX, and structural destruction.*
 
 <p align="center">
   <a href="https://cedsson.github.io/#engine">
-    <img src="assets/krut-showcase.jpg" alt="Krut Engine v2.0 Realtime PBR Showcase" width="100%" style="border-radius: 8px;" />
+    <img src="assets/krut-showcase.jpg" alt="Krut Engine Realtime PBR Showcase" width="100%" style="border-radius: 8px;" />
   </a>
 </p>
 
-* **Graphics Backends:** Custom GPU abstraction layer (`Krut.Engine.Gpu`) supporting **Direct3D 12** and **Vulkan**. Shaders written in HLSL, compiled offline to DXIL and SPIR-V.
-* **Advanced Rendering:** Forward+ (clustered) renderer with linear HDR, tonemapping, full PBR level geometry (metallic/roughness, normal maps, ORM, emissive), directional lightmaps, SSAO, SSR with parallax-corrected reflection probes, and volumetric light/fog.
-* **Image Clarity Philosophy:** Native resolution sharpness with MSAA and sharp post-process AA (CMAA2) — strictly no TAA, no upscaler smear. Targeting **144 FPS** at 1440p on an RTX 3060.
-* **World & Simulation:** TrenchBroom `.map`/`.bsp` CSG workflow, portal and frustum culling, custom triangle BVH capsule collision, and Jitter2 physics.
-* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation, **Native AOT** compilation, and **~240k+ LOC** maintained together across Krut.Engine, Krut.Racing, and Commute (Krut.FPS).
+* **Graphics Backends & Core:** Custom GPU host layer (`Krut.Engine.Gpu` on SDL3 / SDL_GPU) supporting **Direct3D 12** and **Vulkan** (switchable live or via `-driver`), render graph with transient resource sharing, offline-compiled HLSL shaders (DXIL & SPIR-V) with live hot-reload, background JIT warmup, and **krut-cook** offline asset cooking (BC1–BC7 KTX2, cooked meshes/anims, AES-256-GCM `.pak` archives).
+* **Advanced Rendering & Lighting:** Tile + clustered **Forward+** renderer (32 px compute tile culling with depth slabs, Hi-Z GPU light occlusion culling, portal light culling); unified Cook-Torrance GGX PBR (multiple-scattering energy compensation, specular AA, POM) across world, props, and skinned models; custom GI lightmapper with directional lightmaps, one-bounce baked GI, and baked-light specular highlights; **LTC area lights** (tubes, rectangles, disks), **screen-space contact shadows**, translucent shadow maps, procedural spot light cookies, half-res normal SSAO & SSR, per-cluster parallax reflection probes, height-blended `AmbientColumn` model probes, and **froxel volumetric fog & light shafts**.
+* **GPU VFX, Decals & Post-Processing:** 131k-capacity compute **`GpuParticleSystem`** (vector fields, curl turbulence, depth collisions, GPU depth sort, lit volumetric smoke & fire), `RibbonRenderer` trails, 3D projective decal volumes, two-pass **volumetric liquid blood pools** & viewmodel gore stains, explosion shockwave refraction & heat-haze distortion, auto-exposure with zone EV bias, bokeh DoF, and 3D `.cube` LUT colour-grading zones.
+* **Image Clarity Philosophy:** Native resolution sharpness with MSAA (4x default) and sharp post-process AA (SMAA / CMAA2) — strictly no TAA, no upscaler smear. Live runtime quality cost tiers (`r_tier`: Low–Ultra) targeting **144 FPS** at 1440p on an RTX 3060.
+* **Destruction, Physics & World:** TrenchBroom `.map`/`.bsp` workflow, Voronoi-fractured destructible walls (`func_destructible`) with interior lightmap sampling, blast chipping, and structural collapse (`CollapseCells`); custom triangle BVH capsule collision (`CharacterMotor`), **Jitter2** rigid bodies, ragdolls, `JointManager` constraints (hinges, ball-sockets, sliders, springs), `BreakableBody` compounds, `func_water` volumes (Gerstner waves, buoyancy, caustics, swimming), CDLOD terrain with GPU-instanced wind foliage, and Rayleigh/Mie celestial sky & weather.
+* **AI, Audio & Native UI:** **DotRecast** navmeshes with off-thread dynamic obstacle carving, cover sampling, irradiance-based sight & acoustic hearing perception, and allocation-free **Behavior Trees** with squad blackboards; **FMOD Core 2.03** spatial audio with raycast acoustic occlusion, room reverb zones, DSP chains, and beat-synced interactive music; custom GPU retained UI (**Kui** `.kui`/`.kss`) with data bindings, in-world `UiSurface` displays, `SecondaryView` render-to-texture cameras, and built-in dev console, profiler, and gizmo inspector.
+* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation & golden-capture visual regression runner (`-lighttest`, `-capture`), **Native AOT** compilation, and **~350k+ LOC** (**~210k LOC** in `Krut.Engine` alone) maintained solo across `Krut.Engine`, `Krut.Racing`, and `Commute` (`Krut.FPS`).
 
 ---
 
@@ -47,7 +49,7 @@
         <img src="assets/Racing-poster.jpg" alt="Krut.Racing" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        Online multiplayer racing game with an authoritative dedicated server, client prediction, car physics, and an <b>ASP.NET Core & PostgreSQL</b> backend with Steam authentication.
+        Online multiplayer racing game with an authoritative dedicated server, client prediction, custom kinematic simcade car physics, and an <b>ASP.NET Core & PostgreSQL</b> backend with Steam authentication and HMAC-verified race payouts.
       </p>
       <div align="center">
         <img src="https://img.shields.io/badge/Multiplayer-Dedicated_Server-blue?style=flat-square" />
@@ -56,17 +58,17 @@
       </div>
     </td>
     <td width="50%" valign="top">
-      <h4 align="center">🚇 Commute</h4>
+      <h4 align="center">🚇 Commute (Krut.FPS)</h4>
       <a href="https://cedsson.itch.io/commute">
         <img src="assets/commute.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        A 10-minute <b>vertical slice and tech demo for Krut.Engine 1.8</b>, built to integrate and test all subsystems in a playable FPS: Forward+ rendering, capsule-vs-triangle collision, FMOD spatial audio occlusion, and AI navmeshes.
+        Started as a 10-minute playable vertical slice on itch.io (v1.8) and expanded on <b>Krut.Engine v3.2</b> into a photoreal, destructive FPS showcase: Voronoi wall fracture with bending steel rebar and support-graph building collapse (<i>Villa</i>), 100% procedural combat VFX & vector-field room smoke, multi-wall bullet penetration, shrapnel explosions, volumetric liquid blood pools & viewmodel gore, behavior-tree squad AI with light-based stealth & door breaching, and live 3D CCTV monitors.
       </p>
       <div align="center">
-        <img src="https://img.shields.io/badge/Vertical_Slice-10_min-blueviolet?style=flat-square" />
-        <img src="https://img.shields.io/badge/Krut.Engine-v1.8-blue?style=flat-square" />
-        <img src="https://img.shields.io/badge/itch.io-Playable_Demo-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white" />
+        <img src="https://img.shields.io/badge/Krut.Engine-v3.2_Showcase-c8452c?style=flat-square" />
+        <img src="https://img.shields.io/badge/Destruction-Collapse_&_VFX-blueviolet?style=flat-square" />
+        <img src="https://img.shields.io/badge/itch.io-v1.8_Playable_Demo-FA5C5C?style=flat-square&logo=itchdotio&logoColor=white" />
       </div>
     </td>
   </tr>
@@ -85,6 +87,6 @@
 
 ### 🛠️ Tech & Systems
 
-* **Languages & Core:** `C#` &middot; `.NET 10` &middot; `Native AOT` &middot; `HLSL` &middot; `C/C++`
-* **Graphics & Simulation:** `Direct3D 12` &middot; `Vulkan` &middot; `Forward+ Rendering` &middot; `PBR / HDR` &middot; `CMAA2` &middot; `Jitter2 Physics` &middot; `FMOD`
-* **Backend & Infrastructure:** `ASP.NET Core` &middot; `PostgreSQL` &middot; `Docker` &middot; `Steamworks Auth`
+* **Languages & Core:** `C# 14` &middot; `.NET 10` &middot; `Native AOT` &middot; `HLSL` &middot; `SDL3 / SDL_GPU` &middot; `C/C++`
+* **Graphics & Simulation:** `Direct3D 12` &middot; `Vulkan` &middot; `Forward+ Rendering` &middot; `PBR / HDR` &middot; `GPU Compute Particles` &middot; `Structural Destruction` &middot; `SMAA / CMAA2` &middot; `Jitter2 Physics` &middot; `DotRecast AI` &middot; `FMOD Core`
+* **Backend & Infrastructure:** `ASP.NET Core` &middot; `PostgreSQL` &middot; `EF Core` &middot; `Docker` &middot; `Steamworks Auth` &middot; `GitHub Actions`
