@@ -21,7 +21,7 @@
 ---
 
 ### ⚙️ Krut Engine `v3.2`
-> *A modern 3D game engine built solo in C# 14 / .NET 10 with a Quake/Source-inspired BSP workflow, high-end Forward+ PBR rendering, GPU compute VFX, and structural destruction.*
+> *A modern 3D game engine built solo in C# 14 / .NET 10 with a Quake/Source-inspired BSP workflow, Forward+ PBR rendering, GPU compute VFX, and structural destruction.*
 
 <p align="center">
   <a href="https://cedsson.github.io/#engine">
@@ -29,13 +29,13 @@
   </a>
 </p>
 
-* **Graphics Backends & Core:** Custom GPU host layer (`Krut.Engine.Gpu` on SDL3 / SDL_GPU) supporting **Direct3D 12** and **Vulkan** (switchable live or via `-driver`), render graph with transient resource sharing, offline-compiled HLSL shaders (DXIL & SPIR-V) with live hot-reload, background JIT warmup, and **krut-cook** offline asset cooking (BC1–BC7 KTX2, cooked meshes/anims, AES-256-GCM `.pak` archives).
-* **Advanced Rendering & Lighting:** Tile + clustered **Forward+** renderer (32 px compute tile culling with depth slabs, Hi-Z GPU light occlusion culling, portal light culling); unified Cook-Torrance GGX PBR (multiple-scattering energy compensation, specular AA, POM) across world, props, and skinned models; custom GI lightmapper with directional lightmaps, one-bounce baked GI, and baked-light specular highlights; **LTC area lights** (tubes, rectangles, disks), **screen-space contact shadows**, translucent shadow maps, procedural spot light cookies, half-res normal SSAO & SSR, per-cluster parallax reflection probes, height-blended `AmbientColumn` model probes, and **froxel volumetric fog & light shafts**.
-* **GPU VFX, Decals & Post-Processing:** 131k-capacity compute **`GpuParticleSystem`** (vector fields, curl turbulence, depth collisions, GPU depth sort, lit volumetric smoke & fire), `RibbonRenderer` trails, 3D projective decal volumes, two-pass **volumetric liquid blood pools** & viewmodel gore stains, explosion shockwave refraction & heat-haze distortion, auto-exposure with zone EV bias, bokeh DoF, and 3D `.cube` LUT colour-grading zones.
-* **Image Clarity Philosophy:** Native resolution sharpness with MSAA (4x default) and sharp post-process AA (SMAA / CMAA2) — strictly no TAA, no upscaler smear. Live runtime quality cost tiers (`r_tier`: Low–Ultra) targeting **144 FPS** at 1440p on an RTX 3060.
-* **Destruction, Physics & World:** TrenchBroom `.map`/`.bsp` workflow, Voronoi-fractured destructible walls (`func_destructible`) with interior lightmap sampling, blast chipping, and structural collapse (`CollapseCells`); custom triangle BVH capsule collision (`CharacterMotor`), **Jitter2** rigid bodies, ragdolls, `JointManager` constraints (hinges, ball-sockets, sliders, springs), `BreakableBody` compounds, `func_water` volumes (Gerstner waves, buoyancy, caustics, swimming), CDLOD terrain with GPU-instanced wind foliage, and Rayleigh/Mie celestial sky & weather.
-* **AI, Audio & Native UI:** **DotRecast** navmeshes with off-thread dynamic obstacle carving, cover sampling, irradiance-based sight & acoustic hearing perception, and allocation-free **Behavior Trees** with squad blackboards; **FMOD Core 2.03** spatial audio with raycast acoustic occlusion, room reverb zones, DSP chains, and beat-synced interactive music; custom GPU retained UI (**Kui** `.kui`/`.kss`) with data bindings, in-world `UiSurface` displays, `SecondaryView` render-to-texture cameras, and built-in dev console, profiler, and gizmo inspector.
-* **Scale & Architecture:** Modular subsystem design tested via xUnit, deterministic headless simulation & golden-capture visual regression runner (`-lighttest`, `-capture`), **Native AOT** compilation, and **~350k+ LOC** (**~210k LOC** in `Krut.Engine` alone) maintained solo across `Krut.Engine`, `Krut.Racing`, and `Commute` (`Krut.FPS`).
+* **Graphics & Core:** Custom SDL3 / SDL_GPU host (`Krut.Engine.Gpu`) for **Direct3D 12** & **Vulkan**, render graph, offline HLSL &rarr; DXIL/SPIR-V with hot-reload, and `krut-cook` offline asset cooking (KTX2, encrypted `.pak`).
+* **Forward+ & Lighting:** Tile + clustered Forward+ with Hi-Z & portal light culling, unified Cook-Torrance GGX PBR with POM, custom GI lightmapper (directional + one-bounce), LTC area lights, contact & translucent shadows, SSAO, SSR, parallax probes, and froxel volumetric fog.
+* **GPU VFX, Gore & Post:** 131k GPU compute particles (vector fields, lit smoke/fire), 3D decal volumes, volumetric liquid blood pools & viewmodel gore, shockwave/heat-haze distortion, auto-exposure, bokeh DoF, and 3D LUT zones.
+* **Image Clarity:** Native sharpness with MSAA 4x + SMAA/CMAA2 — strictly no TAA or upscaler smear. Live quality tiers targeting **144 FPS** at 1440p on an RTX 3060.
+* **Destruction, Physics & World:** TrenchBroom `.map`/`.bsp` workflow, Voronoi-fractured walls (`func_destructible`) with structural cascade collapse, triangle BVH capsule collision, Jitter2 rigid bodies/ragdolls/joints, breakable compounds, Gerstner water, and CDLOD terrain.
+* **AI, Audio & UI:** DotRecast navmeshes with dynamic carving, luminance-based sight perception & Behavior Trees; FMOD Core 2.03 with raycast acoustic occlusion & beat-synced music; custom GPU retained UI (**Kui** `.kui`/`.kss`) with in-world screens & camera feeds.
+* **Scale & Architecture:** Modular xUnit-tested subsystems (~68k LOC tests), golden-capture visual regression tests, **Native AOT** builds, and **~350k+ LOC** (**~210k LOC** in `Krut.Engine`) maintained solo.
 
 ---
 
@@ -49,7 +49,7 @@
         <img src="assets/Racing-poster.jpg" alt="Krut.Racing" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        Online multiplayer racing game with an authoritative dedicated server, client prediction, custom kinematic simcade car physics, and an <b>ASP.NET Core & PostgreSQL</b> backend with Steam authentication and HMAC-verified race payouts.
+        Online multiplayer spec racer with an authoritative dedicated server, client prediction, custom simcade vehicle physics, and an <b>ASP.NET Core & PostgreSQL</b> backend with Steam auth and HMAC-signed results.
       </p>
       <div align="center">
         <img src="https://img.shields.io/badge/Multiplayer-Dedicated_Server-blue?style=flat-square" />
@@ -63,7 +63,7 @@
         <img src="assets/commute.jpg" alt="Commute Vertical Slice" width="100%" style="border-radius: 6px;" />
       </a>
       <p>
-        Started as a 10-minute playable vertical slice on itch.io (v1.8) and expanded on <b>Krut.Engine v3.2</b> into a photoreal, destructive FPS showcase: Voronoi wall fracture with bending steel rebar and support-graph building collapse (<i>Villa</i>), 100% procedural combat VFX & vector-field room smoke, multi-wall bullet penetration, shrapnel explosions, volumetric liquid blood pools & viewmodel gore, behavior-tree squad AI with light-based stealth & door breaching, and live 3D CCTV monitors.
+        Started as a 10-minute vertical slice on itch.io (v1.8) and expanded on <b>Krut.Engine v3.2</b> into a photoreal, destructive FPS: Voronoi wall fracture with bending rebar and support-graph building collapse, 100% procedural combat VFX & vector-field smoke, bullet penetration, volumetric blood pools, behavior-tree squad AI, and live 3D CCTV monitors.
       </p>
       <div align="center">
         <img src="https://img.shields.io/badge/Krut.Engine-v3.2_Showcase-c8452c?style=flat-square" />
